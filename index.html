@@ -21,7 +21,7 @@ var lastUpdate = new Date("Jul 4, 2021 00:00:00").getTime();
 // Set total Sats at date of the last update  
 var Sats_lastUpdate = 582000; 
   
-// Update the count down every 1 second
+// Update the count down every 500 milliseconds
 var x = setInterval(function() {
 
   // Get today's date and time
@@ -33,27 +33,28 @@ var x = setInterval(function() {
   //Current Sats Calculation
   var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
-  //var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
-  var Current_Sats = Math.round((Sats_lastUpdate + SatsPerDay * time_distance_days) * 1000) / 1000;
+  var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
+  var Current_Sats_milli = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 1000) / 1000;
+  var Current_Sats_rest = Current_Sats_milli - Current_Sats
 
 
   // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((time_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((time_distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((time_distance % (1000 * 60)) / 1000);
+  //var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
+  //var hours = Math.floor((time_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //var minutes = Math.floor((time_distance % (1000 * 60 * 60)) / (1000 * 60));
+  //var seconds = Math.floor((time_distance % (1000 * 60)) / 1000);
     
   // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s " + "<br />" 
-  + " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + "Current Sats: " + Current_Sats;
+  document.getElementById("demo").innerHTML = //days + "d " + hours + "h " + minutes + "m " + seconds + "s " + "<br />" 
+  //+ " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + 
+ Current_Sats + " + " + Current_Sats_rest;
     
   // If the count down is over, write some text 
   //if (distance < 0) {
   //  clearInterval(x);
   //  document.getElementById("demo").innerHTML = "EXPIRED";
   //}
-}, 1000);
+}, 500);
 </script>
 
 </body>
