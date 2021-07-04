@@ -36,8 +36,13 @@ var x = setInterval(function() {
   var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
   var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
   var Current_Sats_rest = Math.floor((Current_Sats_milli - Current_Sats) * 100) / 100;
+  var Millionen = Math.floor(Current_Sats / 1000000);
+  var Tausender = Math.floor(Current_Sats / 1000);
+  var Einer = Math.floor(Current_Sats - Tausender);
+  
   //var Current_Sats_komma = Current_Sats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   var Current_Sats_komma = Current_Sats.toLocaleString();
+  
   // Time calculations for days, hours, minutes and seconds
   //var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
   //var hours = Math.floor((time_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -47,7 +52,8 @@ var x = setInterval(function() {
   // Output the result in an element with id="demo"
   document.getElementById("demo").innerHTML = //days + "d " + hours + "h " + minutes + "m " + seconds + "s " + "<br />" 
   //+ " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + 
- Current_Sats + " + " + Current_Sats_rest + "Current Sats with comma: " + Current_Sats_komma;
+ Current_Sats + " + " + Current_Sats_rest + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer;
+    //"Current Sats with comma: " + Current_Sats_komma;
     
   // If the count down is over, write some text 
   //if (distance < 0) {
