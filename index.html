@@ -1,4 +1,4 @@
-<h1>Sats: 4</h1>
+<h1>Sats:</h1>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -11,7 +11,7 @@ p {
 }
 </style>
 </head>
-<body>
+<body style="background-color:grey;">
 
 <p id="demo"></p>
 
@@ -34,8 +34,8 @@ var x = setInterval(function() {
   var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
-  //var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
-  //var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100) / 100;
+  var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
+  var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100);
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
   var Einer = Math.floor(Current_Sats - Tausender*1000);
@@ -51,7 +51,7 @@ var x = setInterval(function() {
     Einer_str = Einer;
   }
 
-  Tausender_str = Tausender;
+  var Tausender_str = Tausender;
   if (Tausender < 10) {
     Tausender_str = "00" + Tausender;
   }
@@ -60,6 +60,14 @@ var x = setInterval(function() {
   }
   else {
     Tausender_str = Tausender;
+  }
+
+  var Rest_str = Current_Sats_rest;
+  if (Current_Sats_rest < 10) {
+    Rest_str = "0" + Current_Sats_rest;
+  }
+  else {
+    Rest_str = Current_Sats_rest;
   }
   
   //var Current_Sats_komma = Current_Sats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -75,10 +83,13 @@ var x = setInterval(function() {
   //document.getElementById("demo").innerHTML = Current_Sats + " + " + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer; //Current_Sats + " uuu"; //days + "d " + hours + "h " + minutes + "m " + seconds + "s " + "<br />" 
   if (Millionen >= 1) {
     document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
-  }
+  } 
   else {
-    document.getElementById("demo").innerHTML = Tausender+"."+Einer_str; 
+    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:MidnightBlue">' + Tausender + "." + Einer_str + '</span>' + '</span>' +
+    '<span style="font-size:26px">' + '<span style="color:DarkKhaki">' + " , " + Rest_str + '</span>' + '</span>'; 
   }  
+  document.getElementById("demo").style.fontWeight = 'bold';
+
     //+ " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + 
   //Current_Sats + " + " + Current_Sats_rest + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer;
     //"Current Sats with comma: " + Current_Sats_komma;
