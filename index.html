@@ -32,8 +32,11 @@ var x = setInterval(function() {
   
   //Current Sats Calculation
   var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;
-  var Current_Sats = time_distance; //Sats_lastUpdate + time_distance*SatsPerDay;
-  
+  var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
+  //var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
+  var Current_Sats = Math.round((Sats_lastUpdate + SatsPerDay * time_distance_days) * 1000) / 1000;
+
+
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((time_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
