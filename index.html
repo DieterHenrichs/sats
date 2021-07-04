@@ -35,8 +35,7 @@ var x = setInterval(function() {
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
   var Current_Sats_milli = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 1000) / 1000;
-  var Current_Sats_rest = Current_Sats_milli - Current_Sats
-
+  var Current_Sats_rest = Math.floor((Current_Sats_milli - Current_Sats) * 1000) / 1000;
 
   // Time calculations for days, hours, minutes and seconds
   //var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
