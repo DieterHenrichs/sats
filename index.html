@@ -39,6 +39,28 @@ var x = setInterval(function() {
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
   var Einer = Math.floor(Current_Sats - Tausender*1000);
+
+  var Einer_str = Einer;
+  if (Einer < 10) {
+    Einer_str = "00" + Einer;
+  }
+  else if (Einer < 100) {
+    Einer_str = "0" + Einer;
+  }
+  else {
+    Einer_str = Einer;
+  }
+
+  Tausender_str = Tausender;
+  if (Tausender < 10) {
+    Tausender_str = "00" + Tausender;
+  }
+  else if (Tausender < 100) {
+    Tausender_str = "0" + Tausender;
+  }
+  else {
+    Tausender_str = Tausender;
+  }
   
   //var Current_Sats_komma = Current_Sats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   //var Current_Sats_komma = Current_Sats.toLocaleString();
@@ -52,10 +74,10 @@ var x = setInterval(function() {
   // Output the result in an element with id="demo"
   //document.getElementById("demo").innerHTML = Current_Sats + " + " + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer; //Current_Sats + " uuu"; //days + "d " + hours + "h " + minutes + "m " + seconds + "s " + "<br />" 
   if (Millionen >= 1) {
-    document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer; 
+    document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
   }
   else {
-    document.getElementById("demo").innerHTML = Tausender+"."+Einer; 
+    document.getElementById("demo").innerHTML = Tausender+"."+Einer_str; 
   }  
     //+ " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + 
   //Current_Sats + " + " + Current_Sats_rest + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer;
