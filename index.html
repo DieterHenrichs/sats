@@ -32,6 +32,7 @@ var x = setInterval(function() {
   
   //Current Sats Calculation
   var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;
+  var SatsPerDay_round = Math.floor(SatsPerDay);
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
   var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
@@ -39,6 +40,8 @@ var x = setInterval(function() {
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
   var Einer = Math.floor(Current_Sats - Tausender*1000);
+  var Onesat_min = Math.floor((24 * 60) / SatsPerDay); 
+  var Onesat_sec = Math.floor(((24 * 60 * 60) / SatsPerDay) - Onesat_min * 60);
 
   var Einer_str = Einer;
   if (Einer < 10) {
@@ -85,8 +88,10 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
   } 
   else {
-    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:MidnightBlue">' + Tausender + "." + Einer_str + '</span>' + '</span>' +
-    '<span style="font-size:26px">' + '<span style="color:DarkKhaki">' + " , " + Rest_str + '</span>' + '</span>'; 
+    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + Tausender + "." + Einer_str + '</span>' + '</span>' +
+    '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
+    '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
+    '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Sat time: " + Onesat_min + ":" + Onesat_sec + " min." + '</span>' + '</span>'; 
   }  
   document.getElementById("demo").style.fontWeight = 'bold';
 
