@@ -39,7 +39,7 @@ var x = setInterval(function() {
   var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100);
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
-  var Einer = Math.floor(Current_Sats - Tausender*1000);
+  var Einer = Math.floor(Current_Sats - Millionen * 1000000 - Tausender*1000);
   var Onesat_min = Math.floor((24 * 60) / SatsPerDay); 
   var Onesat_sec = Math.floor(((24 * 60 * 60) / SatsPerDay) - Onesat_min * 60);
 
