@@ -17,9 +17,9 @@ p {
 
 <script>
 // Set the date of the last update
-var lastUpdate = new Date("Jul 4, 2021 00:00:00").getTime();
+var lastUpdate = new Date("Jul 5, 2021 00:00:00").getTime();
 // Set total Sats at date of the last update  
-var Sats_lastUpdate = 582000; 
+var Sats_lastUpdate = 1591000; 
   
 // Update the count down every 1000 milliseconds
 var x = setInterval(function() {
@@ -72,38 +72,25 @@ var x = setInterval(function() {
   else {
     Rest_str = Current_Sats_rest;
   }
-  
-  //var Current_Sats_komma = Current_Sats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  //var Current_Sats_komma = Current_Sats.toLocaleString();
-  
-  // Time calculations for days, hours, minutes and seconds
-  //var days = Math.floor(time_distance / (1000 * 60 * 60 * 24));
-  //var hours = Math.floor((time_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  //var minutes = Math.floor((time_distance % (1000 * 60 * 60)) / (1000 * 60));
-  //var seconds = Math.floor((time_distance % (1000 * 60)) / 1000);
-    
+      
   // Output the result in an element with id="demo"
-  //document.getElementById("demo").innerHTML = Current_Sats + " + " + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer; //Current_Sats + " uuu"; //days + "d " + hours + "h " + minutes + "m " + seconds + "s " + "<br />" 
   if (Millionen >= 1) {
     document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
+    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
+    Millionen + "." + Tausender + "." + Einer_str + '</span>' + '</span>' +
+    '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
+    '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
+    '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Sat time: " + Onesat_min + ":" + Onesat_sec + " min." + '</span>' + '</span>'; 
   } 
   else {
-    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + Tausender + "." + Einer_str + '</span>' + '</span>' +
+    document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
+    Tausender + "." + Einer_str + '</span>' + '</span>' +
     '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
     '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Sat time: " + Onesat_min + ":" + Onesat_sec + " min." + '</span>' + '</span>'; 
   }  
   document.getElementById("demo").style.fontWeight = 'bold';
 
-    //+ " Sats Last Update: " + Sats_lastUpdate + "<br />" + "Sats Per Day" + SatsPerDay + 
-  //Current_Sats + " + " + Current_Sats_rest + "Millionen: "+Millionen+" Tausender: "+Tausender+" Einer: "+Einer;
-    //"Current Sats with comma: " + Current_Sats_komma;
-    
-  // If the count down is over, write some text 
-  //if (distance < 0) {
-  //  clearInterval(x);
-  //  document.getElementById("demo").innerHTML = "EXPIRED";
-  //}
 }, 1000);
 </script>
 
