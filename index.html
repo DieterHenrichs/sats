@@ -72,19 +72,36 @@ var x = setInterval(function() {
   else {
     Rest_str = Current_Sats_rest;
   }
+  
+  var Onesat_min_str = Onesat_min;
+  if (Onesat_min < 10) {
+    Onesat_min_str = "0" + Onesat_min;
+  }
+  else {
+    Onesat_min_str = Onesat_min;
+  }  
+  
+  var Onesat_sec_str = Onesat_sec;
+  if (Onesat_sec < 10) {
+    Onesat_sec_str = "0" + Onesat_sec;
+  }
+  else {
+    Onesat_sec_str = Onesat_sec;
+  }    
+  
       
   // Output the result in an element with id="demo"
   if (Millionen >= 1) {
     document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
     document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
-    Millionen + "." + Tausender + "." + Einer_str + '</span>' + '</span>' +
+    Millionen + "." + Tausender_str + "." + Einer_str + '</span>' + '</span>' +
     '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
     '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Sat time: " + Onesat_min + ":" + Onesat_sec + " min." + '</span>' + '</span>'; 
   } 
   else {
     document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
-    Tausender + "." + Einer_str + '</span>' + '</span>' +
+    Tausender_str + "." + Einer_str + '</span>' + '</span>' +
     '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
     '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Sat time: " + Onesat_min + ":" + Onesat_sec + " min." + '</span>' + '</span>'; 
