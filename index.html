@@ -1,4 +1,4 @@
-<h1>Sats:3</h1>
+<h1>Sats:</h1>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -32,13 +32,11 @@ var x = setInterval(function() {
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   
   //Current Sats Calculation
-  //var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;  //ungefährer Wert (kleiner als der exakte)
-  //var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days); //ungefährer Wert (kleiner als der exakte)
-  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days);  //exakter Wert (mit Berücksichtigung Zinseszins)
+  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1+0.000109589*1.16, time_distance_days);  //exakter Wert (mit Zinseszins-Berücksichtigung)
   var Current_Sats = Math.floor(Current_Sats_exact);
-  var Current_Sats_centi = Math.floor(Current_Sats_exact - Current_Sats) * 100) / 100;
-  var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100);
-  var SatsPerDay = Current_Sats_exact - (Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days-1)); //exakter Wert
+  var Current_Sats_centi = Math.floor((Current_Sats_exact - Current_Sats) * 100) / 100;
+  var Current_Sats_rest = Math.floor(Current_Sats_centi*100);
+  var SatsPerDay = Current_Sats_exact - (Sats_lastUpdate * Math.pow(1+0.000109589*1.16, time_distance_days - 1)); //exakter Wert (mit Zinseszins-Berücksichtigung)
   var SatsPerDay_round = Math.floor(SatsPerDay);
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
@@ -92,7 +90,6 @@ var x = setInterval(function() {
     Onesat_sec_str = Onesat_sec;
   }    
   
-      
   // Output the result in an element with id="demo"
   if (Millionen >= 1) {
     document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
@@ -104,7 +101,7 @@ var x = setInterval(function() {
   } 
   else {
     document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
-    Tausender_str + "." + Einer_str + '</span>' + '</span>' +
+    Tausender_str + "." + Einer_str + '</span>' + '</span>' + //"time distance days: " + time_distance_days + "exakter Sat Wert: " + Current_Sats_exact +
     '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + " , " + Rest_str + "<br />" + "<br />" + 
     '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Time / Sat: " + Onesat_min_str + ":" + Onesat_sec_str + " min." + '</span>' + '</span>'; 
