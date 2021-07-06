@@ -1,4 +1,4 @@
-<h1>Sats:</h1>
+<h1>Sats:2</h1>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -27,13 +27,14 @@ var x = setInterval(function() {
   // Get today's date and time
   var now = new Date().getTime();
     
-  // Find the distance between now and the count down date
+  // Calculate the distance between now and last update
   var time_distance = now - lastUpdate;
+  var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   
   //Current Sats Calculation
-  var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;
+  //var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;  //ungefährer Wert (kleiner als der exakte)
+  var SatsPerDay = Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days);  //exakter Wert (mit Berücksichtigung Zinseszins)
   var SatsPerDay_round = Math.floor(SatsPerDay);
-  var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
   var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
   var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100);
