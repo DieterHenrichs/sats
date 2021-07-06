@@ -1,4 +1,4 @@
-<h1>Sats:2</h1>
+<h1>Sats:3</h1>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,11 +33,13 @@ var x = setInterval(function() {
   
   //Current Sats Calculation
   //var SatsPerDay = Sats_lastUpdate * 0.000109589*1.16;  //ungefährer Wert (kleiner als der exakte)
-  var SatsPerDay = Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days);  //exakter Wert (mit Berücksichtigung Zinseszins)
-  var SatsPerDay_round = Math.floor(SatsPerDay);
-  var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days);
-  var Current_Sats_centi = Math.floor((Sats_lastUpdate + SatsPerDay * time_distance_days) * 100) / 100;
+  //var Current_Sats = Math.floor(Sats_lastUpdate + SatsPerDay * time_distance_days); //ungefährer Wert (kleiner als der exakte)
+  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days);  //exakter Wert (mit Berücksichtigung Zinseszins)
+  var Current_Sats = Math.floor(Current_Sats_exact);
+  var Current_Sats_centi = Math.floor(Current_Sats_exact - Current_Sats) * 100) / 100;
   var Current_Sats_rest = Math.floor((Current_Sats_centi - Current_Sats) * 100);
+  var SatsPerDay = Current_Sats_exact - (Sats_lastUpdate * Math.pow(1.000109589*1.16, time_distance_days-1)); //exakter Wert
+  var SatsPerDay_round = Math.floor(SatsPerDay);
   var Millionen = Math.floor(Current_Sats / 1000000);
   var Tausender = Math.floor((Current_Sats - Millionen * 1000000) / 1000);
   var Einer = Math.floor(Current_Sats - Millionen * 1000000 - Tausender*1000);
