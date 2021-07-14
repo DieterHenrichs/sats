@@ -18,8 +18,12 @@ p {
 <script>
 // Set the date of the last update
 var lastUpdate = new Date("Jul 11, 2021 00:00:00").getTime();
-// Set total Sats at date of the last update  
-var Sats_lastUpdate = 603000; 
+// Set total Sats at date of the last update 
+var lastUpdate_Sats = 574000;
+//***End of Initial Variables *** only these two have to be set ***   
+  
+//Compute Sats last Update including tx-deduction  
+var Sats_lastUpdate = lastUpdate_Sats + 30000; 
   
 // Update the count down every 1000 milliseconds
 var x = setInterval(function() {
