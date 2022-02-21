@@ -38,12 +38,12 @@ var x = setInterval(function() {
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   
   //Current Sats Calculation
-  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1+0.01*lastUpdate_Interest/380, time_distance_days);  //exakter Wert (mit Zinseszins-Berücksichtigung)
+  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1+0.01*lastUpdate_Interest/372.377, time_distance_days);  //exakter Wert (mit Zinseszins-Berücksichtigung)
   var Current_Sats = Math.floor(Current_Sats_exact);
   var Current_Sats_wo_Fees = Math.floor(Current_Sats_exact-30000); //Current Sats without txfees
   var Current_Sats_centi = Math.floor((Current_Sats_exact - Current_Sats) * 100) / 100;
   var Current_Sats_rest = Math.floor(Current_Sats_centi*100);
-  var SatsPerDay = Current_Sats_exact - (Sats_lastUpdate * Math.pow(1+0.000109589*1.16, time_distance_days - 1)); //exakter Wert (mit Zinseszins-Berücksichtigung)
+  var SatsPerDay = Current_Sats_exact - (Sats_lastUpdate * Math.pow(1+0.01*lastUpdate_Interest/372.377, time_distance_days - 1)); //exakter Wert (mit Zinseszins-Berücksichtigung)
   var SatsPerDay_round = Math.floor(SatsPerDay);
   var Millionen = Math.floor(Current_Sats_wo_Fees / 1000000);
   var Tausender = Math.floor((Current_Sats_wo_Fees - Millionen * 1000000) / 1000);
