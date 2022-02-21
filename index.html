@@ -20,7 +20,9 @@ p {
 var lastUpdate = new Date("Feb 22, 2022 00:00:00").getTime();
 // Set total Sats at date of the last update 
 var lastUpdate_Sats = 1316000;
-//***End of Initial Variables *** only these two have to be set ***   
+// Set intermediate interest rate at date of last update in percent
+var lastUpdate_Interest = 5.68; //% 
+//***End of Initial Variables *** only these 3 have to be set ***   
   
 //Compute Sats last Update including tx-deduction  
 var Sats_lastUpdate = lastUpdate_Sats + 30000; 
@@ -36,7 +38,7 @@ var x = setInterval(function() {
   var time_distance_days = time_distance / (1000 * 60 * 60 * 24); 
   
   //Current Sats Calculation
-  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1+0.000109589*1.16, time_distance_days);  //exakter Wert (mit Zinseszins-Berücksichtigung)
+  var Current_Sats_exact = Sats_lastUpdate * Math.pow(1+0.01*lastUpdate_Interest/380, time_distance_days);  //exakter Wert (mit Zinseszins-Berücksichtigung)
   var Current_Sats = Math.floor(Current_Sats_exact);
   var Current_Sats_wo_Fees = Math.floor(Current_Sats_exact-30000); //Current Sats without txfees
   var Current_Sats_centi = Math.floor((Current_Sats_exact - Current_Sats) * 100) / 100;
