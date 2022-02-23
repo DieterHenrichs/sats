@@ -2,6 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<title>Dieter Henrichs Sats Counter</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 p {
@@ -14,8 +15,16 @@ p {
 <body style="background-color:grey;">
 
 <p id="demo"></p>
+<p id="demo1"></p>
+<p id="demo2"></p>
 
 <script>
+var json1 = '{"time":{"updated":"Feb 23, 2022 15:13:00 UTC","updatedISO":"2022-02-23T15:13:00+00:00","updateduk":"Feb 23, 2022 at 15:13 GMT"},"disclaimer":"This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org","chartName":"Bitcoin","bpi":{"USD":{"code":"USD","symbol":"&#36;","rate":"38,626.3550","description":"United States Dollar","rate_float":38626.355},"GBP":{"code":"GBP","symbol":"&pound;","rate":"28,454.0272","description":"British Pound Sterling","rate_float":28454.0272},"EUR":{"code":"EUR","symbol":"&euro;","rate":"34,081.5781","description":"Euro","rate_float":34081.5781}}}';
+var json2 = '{"time":{"updated":"Feb 23, 2022 15:13:00 UTC","updatedISO":"2022-02-23T15:13:00+00:00","updateduk":"Feb 23, 2022 at 15:13 GMT"},"disclaimer":"This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org","chartName":"Bitcoin","bpi":{"USD":{"code":"USD","symbol":"&#36;","rate":"38,626.3550","description":"United States Dollar","rate_float":38626.355},"GBP":{"code":"GBP","symbol":"&pound;","rate":"28,454.0272","description":"British Pound Sterling","rate_float":28454.0272},"EUR":{"code":"EUR","symbol":"&euro;","rate":"34,081.5781","description":"Euro","rate_float":34081.5781}}}';
+//var json1 = '{"name": "Peter", "age": 22, "country": "United States"}';
+
+var obj1 = JSON.parse(json1);
+
 // Set the date of the last update
 var lastUpdate = new Date("Feb 22, 2022 00:00:00").getTime();
 // Set total Sats at date of the last update 
@@ -50,6 +59,39 @@ var x = setInterval(function() {
   var Einer = Math.floor(Current_Sats_wo_Fees - Millionen * 1000000 - Tausender*1000);
   var Onesat_min = Math.floor((24 * 60) / SatsPerDay); 
   var Onesat_sec = Math.floor(((24 * 60 * 60) / SatsPerDay) - Onesat_min * 60);
+
+  //Aktuellen BTC Preis ziehen; inspiriert durch https://www.ssaurel.com/blog/create-a-bitcoin-price-index-watcher-in-html5/
+  var url = "https://api.coindesk.com/v1/bpi/currentprice.json"; //Aktueller BTC Preis
+  var xmlhttp = new XMLHttpRequest();
+  var Europreis = 34000;
+  //Europreis = obj1.name;
+  //Europreis = obj1.bpi.EUR.rate_float;
+  
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4  &&  this.status == 200) {
+      var json3 = JSON.parse(this.responseText);
+      parseJson(json3);
+    }		
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  function parseJson(json3) {
+    var time = "<b>Last Updated : " + json3["time"]["updated"] + "</b>";
+    var usdValue = "1 BTC equals to $" + json3["bpi"]["USD"]["rate"];
+    var gbpValue = "1 BTC equals to &pound;" + json3["bpi"]["GBP"]["rate"];
+    var euroValue = json3["bpi"]["EUR"]["rate_float"];
+	//var euroValue =
+	//var euroooValue = json["bpi"]["EUR"]["rate"];
+	//Europreis = euroValue; //mstc
+	//return euroValue;
+	//document.getElementById("Europreis").value = euroValue;
+	  document.getElementById("demo2").innerHTML = euroValue;
+    //time + "<br /><br />" + usdValue + "<br />" + gbpValue + "<br />" + euroValue;
+  }
+  // ********** Ende BTC Preis ziehen *******************
+//var euroooValue = "asfkjdas";
+	//Europreis = json2.bpi.EUR.rate_float;
 
   var Einer_str = Einer;
   if (Einer < 10) {
@@ -97,14 +139,23 @@ var x = setInterval(function() {
   else {
     Onesat_sec_str = Onesat_sec;
   }    
+  Europreis = document.getElementById("demo2").innerHTML;
+  //Europreis = 2*Europreis;
+  
+  var BTC_Sum = Math.floor(Current_Sats*0.00000001*1000)/1000;
+  var EuroPerDay = SatsPerDay_round*0.00000001*Europreis;
+  var EuroPerDay = Math.round((EuroPerDay + Number.EPSILON) * 100) / 100;
+  
+  document.getElementById("demo1").innerHTML = "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />";
   
   // Output the result in an element with id="demo"
-  if (Millionen >= 1) {
-    document.getElementById("demo").innerHTML = Millionen+"."+Tausender+"."+Einer_str; 
+  if (Millionen >= 1) { 
     document.getElementById("demo").innerHTML = "<br />" + "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
-    Millionen + "." + Tausender_str + "." + Einer_str + '</span>' + '</span>' +
-    '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + Rest_str + "<br />" + "<br />" + 
-    '</span>' + '<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + '</span>' + '</span>' + "<br />" +
+    Millionen + "." + Tausender_str + "." + Einer_str + '</span>' + '</span>' + "<br />" +
+	'<span style="font-size:15px">' + '<span style="color:LightSteelBlue">' + "(" + BTC_Sum + "฿)" + "<br />" + "<br />" + "<br />" +'</span>' +
+    '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + Rest_str + "<br />" + "<br />" + '</span>' + //derzeit ausgeblendet (Centi-Sats)
+	'<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + "<br />" + '</span>' + '</span>' + 
+	'<span style="font-size:16px">' + '<span style="color:Orange">' + "(" + EuroPerDay + "€)" + "<br />" + "<br />" +'</span>' + '</span>' + 
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Time / Sat: " + Onesat_min_str + ":" + Onesat_sec_str + " min." + '</span>' + '</span>'; 
   } 
   else {
