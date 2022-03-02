@@ -1,4 +1,4 @@
-<h1>Sats:</h1>
+<span style="color:mistyrose"> <h1>Sats:</h1> </span>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,10 +12,14 @@ p {
 }
 </style>
 </head>
-<body style="background-color:grey;">
+<body style="background-color:midnightblue;">
 
+<!-- Anordnung der Page-Abschnitte -->
 <p id="demo"></p>
 <p id="demo1"></p>
+<p style="text-align: center;"> <!-- Hintergrundmusik -->
+<iframe width="800" height="315" src="https://www.youtube.com/embed/tNkZsRW7h2c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 <p id="demo2"></p>
 
 <script>
@@ -161,10 +165,10 @@ var x = setInterval(function() {
   
   //Dekoration
   document.getElementById("demo1").innerHTML = '<span style="font-size:120px">' + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />";
-  
+   
   // Output the result in an element with id="demo"
   if (Millionen >= 1) { 
-    document.getElementById("demo").innerHTML = "<br />" + '<span style="font-size:120px">' + '<span style="color:DarkSlateGrey">' + 
+    document.getElementById("demo").innerHTML = "<br />" + '<span style="font-size:120px">' + '<span style="color:powderblue">' + 
     Millionen + "." + Tausender_str + "." + Einer_str + '</span>' + '</span>' + "<br />" +
 	'<span style="font-size:15px">' + '<span style="color:LightSteelBlue">' + "(" + BTC_Sum + "฿)" + "<br />" + "<br />" +'</span>' +
     '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + Rest_str + "<br />" + "<br />" + '</span>' + //derzeit ausgeblendet (Centi-Sats)
