@@ -136,7 +136,9 @@ var x = setInterval(function() {
   Europreis = document.getElementById("demo3").innerHTML;
   
   var EuroPerDay = SatsPerDay_round*0.00000001*Europreis;
-  var EuroPerDay = Math.round((EuroPerDay + Number.EPSILON) * 100) / 100;
+  //EuroPerDay = Math.round((EuroPerDay + Number.EPSILON) * 100) / 100;
+  EuroPerDay = EuroPerDay.toFixed(2);
+	
   var Europreis_gerundet = Math.floor(Europreis);
   var Europreis_Mio = Math.floor(Europreis_gerundet / 1000000);
   var Europreis_Tsd = Math.floor((Europreis_gerundet - Europreis_Mio * 1000000) / 1000);
