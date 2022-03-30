@@ -169,6 +169,8 @@ var x = setInterval(function() {
   
   if (Europreis_Mio >= 1) { Europreis_str = Europreis_Mio + '.' + Europreis_Tsd_str + '.' + Europreis_Einer_str; } else { Europreis_str = Europreis_Tsd_str + '.' + Europreis_Einer_str; }
   
+  var Eurowert = Math.floor(Current_Sats*0.00000001*Europreis_gerundet);
+  
   //Dekoration
   document.getElementById("demo1").innerHTML = '<span style="font-size:120px">' + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />" + "<br />";
    
@@ -176,10 +178,11 @@ var x = setInterval(function() {
   if (Millionen >= 1) { 
     document.getElementById("demo").innerHTML = "<br />" + '<span style="font-size:120px">' + '<span style="color:powderblue">' + 
     Millionen + "." + Tausender_str + "." + Einer_str + '</span>' + '</span>' + "<br />" +
-	'<span style="font-size:15px">' + '<span style="color:LightSteelBlue">' + "(" + BTC_Sum + "฿)" + "<br />" + "<br />" +'</span>' +
-    '<span style="font-size:26px">' + '<span style="color:LightSteelBlue">' + Rest_str + "<br />" + "<br />" + '</span>' + //derzeit ausgeblendet (Centi-Sats)
+	'<span style="font-size:15px">' + '<span style="color:LightSteelBlue">' + "(" + BTC_Sum + "฿)" + "<br />" +'</span>' +
+	'<span style="font-size:10px">' + '<span style="color:DarkSlateBlue">' + "(" + Eurowert + " €)" + "<br />" + "<br />" +'</span>' +
+    '<span style="font-size:22px">' + '<span style="color:LightSteelBlue">' + Rest_str + "<br />" + "<br />" + '</span>' + //derzeit ausgeblendet (Centi-Sats)
 	'<span style="color:DarkSeaGreen">' + "Sats per day: " + SatsPerDay_round + "<br />" + '</span>' + '</span>' + 
-	'<span style="font-size:16px">' + '<span style="color:Orange">' + "(" + EuroPerDay + "€)" + "<br />" + "<br />" +'</span>' + '</span>' + 
+	'<span style="font-size:16px">' + '<span style="color:Orange">' + "(" + EuroPerDay + " €)" + "<br />" + "<br />" +'</span>' + '</span>' + 
     '<span style="font-size:14px">' + '<span style="color:MintCream">' + "Time / Sat: " + Onesat_min_str + ":" + Onesat_sec_str + " min." + '</span>' + '</span>' + "<br />" +"<br />" +
 	'<span style="font-size:14px">' + '<span style="color:LightSteelBlue">' + "Current BTC Price: " + Europreis_str + " €" + '</span>' + '</span>'; 
   } 
